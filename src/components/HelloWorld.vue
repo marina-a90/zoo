@@ -9,6 +9,7 @@
         <th>Name</th> 
         <th>Birthday</th>
         <th>Remove from list</th>
+        <th>Move to top of the list</th>
       </tr>
       <tr v-for="(animal, index) in animals" :key="animal">
         <td>{{ animal.species }}</td>
@@ -16,6 +17,7 @@
         <td v-if="animal.birthday">{{ animal.birthday }}</td>
         <td v-else>Nepoznat</td>
         <td><button @click="removeFromList(index)">Remove</button></td>
+        <td><button @click="moveToTop(index)">Move to top</button></td>
       </tr>
     </table>
 
@@ -41,6 +43,12 @@ export default {
       let animal = this.animals[index];
       this.animals.splice(index, 1);
       alert(`${animal.species} removed from the list.`);
+    },
+    moveToTop(index) {
+      let animal = this.animals[index];
+      this.animals.splice(index, 1);
+      this.animals.unshift(animal);
+      alert(`${animal.species} moved to top of the list.`);
     }
   }
 };
