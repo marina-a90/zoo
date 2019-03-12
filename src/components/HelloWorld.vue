@@ -3,6 +3,13 @@
 
     <h1>ZOO</h1>
 
+    <form @submit.prevent="addAnimal">
+      <input type="text" v-model="animal.species" placeholder="species"/>
+      <input type="text" v-model="animal.name" placeholder="name"/>
+      <input type="text" v-model="animal.birthday" placeholder="birth date"/>
+      <button type="submit">Add animal</button>
+    </form>
+
     <table style="width:100%">
       <tr>
         <th>Species</th>
@@ -28,6 +35,7 @@
 export default {
   data() {
     return {
+      animal: { species: "", name: "", birthday: "" },
       animals: [
         { species: "giraffe", name: "pera", birthday: "01.01.2000." },
         { species: "elephant", name: "sima", birthday: "01.01.2000." },
@@ -49,6 +57,13 @@ export default {
       this.animals.splice(index, 1);
       this.animals.unshift(animal);
       alert(`${animal.species} moved to top of the list.`);
+    },
+    addAnimal() {
+      this.animals.push({
+        species: this.animal.species,
+        name: this.animal.name,
+        birthday: this.animal.birthday
+      });
     }
   }
 };
