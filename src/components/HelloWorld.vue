@@ -24,7 +24,7 @@
         <th>Remove from list</th>
         <th>Move to top of the list</th>
       </tr>
-      <tr v-for="(animal, index) in animals" :key="animal">
+      <tr v-for="(animal, index) in animals" :key="index">
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
         <td v-if="animal.birthday">{{ animal.birthday }}</td>
@@ -32,6 +32,16 @@
         <td>{{ animal.sector }}</td>
         <td><button @click="removeFromList(index)">Remove</button></td>
         <td><button @click="moveToTop(index)">Move to top</button></td>
+      </tr>
+    </table>
+
+    <table style="width:50%">
+      <tr>
+        <th>Sectors</th>
+      </tr>
+      <tr v-for="(sector, index) in sectors" :key="index">
+        <td>{{ sector }}</td>
+        <td><button @click="seeAllFromSector(index)">See all {{ sector }}s</button></td>
       </tr>
     </table>
 
@@ -94,6 +104,26 @@ export default {
         sector: this.animal.sector
       };
       this.animals.push(animal);
+    },
+    seeAllFromSector(index) {
+      let sector = this.sectors[index];
+      console.log(sector);
+      let animalsInSector = this.animals.filter(
+        animal => sector === animal.sector
+      );
+      let sectorList = [];
+      let msg = "";
+      this.animals.forEach(function(animal) {
+        if (sector === animal.sector) {
+          sectorList.push(animal.species);
+        }
+      });
+      if (sectorList.length > 0) {
+        msg = `Animals from ${sector}s are ${[...sectorList]}`;
+      } else {
+        msg = "There are not animals in this sector :(";
+      }
+      alert(msg);
     }
   }
 };
