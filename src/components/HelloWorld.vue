@@ -7,6 +7,11 @@
       <input type="text" v-model="animal.species" placeholder="species"/>
       <input type="text" v-model="animal.name" placeholder="name"/>
       <input type="text" v-model="animal.birthday" placeholder="birth date"/>
+
+    <select v-model="animal.sector">
+      <option v-for="sector in sectors" :key="sector" :value="sector">{{ sector }}</option>
+    </select>
+
       <button type="submit">Add animal</button>
     </form>
 
@@ -15,6 +20,7 @@
         <th>Species</th>
         <th>Name</th> 
         <th>Birthday</th>
+        <th>Sector</th>
         <th>Remove from list</th>
         <th>Move to top of the list</th>
       </tr>
@@ -23,6 +29,7 @@
         <td>{{ animal.name }}</td>
         <td v-if="animal.birthday">{{ animal.birthday }}</td>
         <td v-else>Nepoznat</td>
+        <td>{{ animal.sector }}</td>
         <td><button @click="removeFromList(index)">Remove</button></td>
         <td><button @click="moveToTop(index)">Move to top</button></td>
       </tr>
@@ -35,14 +42,35 @@
 export default {
   data() {
     return {
-      animal: { species: "", name: "", birthday: "" },
+      animal: { species: "", name: "", birthday: "", sector: "" },
       animals: [
-        { species: "giraffe", name: "pera", birthday: "01.01.2000." },
-        { species: "elephant", name: "sima", birthday: "01.01.2000." },
-        { species: "tiger", name: "djoka", birthday: "01.01.2000." },
-        { species: "gorilla", name: "jova", birthday: "" },
-        { species: "parrot", name: "joca", birthday: "01.01.2000." }
-      ]
+        {
+          species: "giraffe",
+          name: "pera",
+          birthday: "01.01.2000.",
+          sector: "mamal"
+        },
+        {
+          species: "elephant",
+          name: "sima",
+          birthday: "01.01.2000.",
+          sector: "mamal"
+        },
+        {
+          species: "tiger",
+          name: "djoka",
+          birthday: "01.01.2000.",
+          sector: "mamal"
+        },
+        { species: "gorilla", name: "jova", birthday: "", sector: "mamal" },
+        {
+          species: "parrot",
+          name: "joca",
+          birthday: "01.01.2000.",
+          sector: "mamal"
+        }
+      ],
+      sectors: ["mamal", "bug"]
     };
   },
 
@@ -62,7 +90,8 @@ export default {
       let animal = {
         species: this.animal.species,
         name: this.animal.name,
-        birthday: this.animal.birthday
+        birthday: this.animal.birthday,
+        sector: this.animal.sector
       };
       this.animals.push(animal);
     }
