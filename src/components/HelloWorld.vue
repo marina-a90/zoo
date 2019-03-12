@@ -8,12 +8,14 @@
         <th>Species</th>
         <th>Name</th> 
         <th>Birthday</th>
+        <th>Remove from list</th>
       </tr>
-      <tr v-for="animal in animals" :key="animal">
+      <tr v-for="(animal, index) in animals" :key="animal">
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
         <td v-if="animal.birthday">{{ animal.birthday }}</td>
         <td v-else>Nepoznat</td>
+        <td><button @click="removeFromList(index)">Remove</button></td>
       </tr>
     </table>
 
@@ -32,6 +34,14 @@ export default {
         { species: "parrot", name: "joca", birthday: "01.01.2000." }
       ]
     };
+  },
+
+  methods: {
+    removeFromList(index) {
+      let animal = this.animals[index];
+      this.animals.splice(index, 1);
+      alert(`${animal.species} removed from the list.`);
+    }
   }
 };
 </script>
