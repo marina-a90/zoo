@@ -12,7 +12,8 @@
       <tr v-for="animal in animals" :key="animal">
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
-        <td>{{ animal.birthday }}</td>
+        <td v-if="animal.birthday">{{ animal.birthday }}</td>
+        <td v-else>Nepoznat</td>
       </tr>
     </table>
 
@@ -27,7 +28,7 @@ export default {
         { species: "giraffe", name: "pera", birthday: "01.01.2000." },
         { species: "elephant", name: "sima", birthday: "01.01.2000." },
         { species: "tiger", name: "djoka", birthday: "01.01.2000." },
-        { species: "gorilla", name: "jova", birthday: "01.01.2000." },
+        { species: "gorilla", name: "jova", birthday: "" },
         { species: "parrot", name: "joca", birthday: "01.01.2000." }
       ]
     };
