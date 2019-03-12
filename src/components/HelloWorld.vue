@@ -59,11 +59,12 @@ export default {
       alert(`${animal.species} moved to top of the list.`);
     },
     addAnimal() {
-      this.animals.push({
+      let animal = {
         species: this.animal.species,
         name: this.animal.name,
         birthday: this.animal.birthday
-      });
+      };
+      this.animals.push(animal);
     }
   }
 };
